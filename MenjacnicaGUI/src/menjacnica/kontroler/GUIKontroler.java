@@ -109,5 +109,9 @@ public class GUIKontroler {
 	public static void dodajTekstStatus(String tekst){
 		glavniProzor.dodajTekstStatus(tekst);
 	}
+	public static void obrisiKurs(int selectedRow) {
+		menjacnica.obrisiKurs(selectedRow);
+		glavniProzor.osveziTabelu(menjacnica.getKursevi());
+	}
 	
 }

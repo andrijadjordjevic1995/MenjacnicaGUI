@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import java.awt.Dimension;
 import javax.swing.KeyStroke;
@@ -263,6 +264,23 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnIzbrisiKurs() {
 		if (btnIzbrisiKurs == null) {
 			btnIzbrisiKurs = new JButton("Izbrisi Kurs");
+			btnIzbrisiKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					int red = table.getSelectedRow();
+					if(red >= 0){
+						if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da obrisete kurs?", "Greska", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+						GUIKontroler.obrisiKurs(table.getSelectedRow());
+						dodajTekstStatus("Izbrisan je red sa indeksom: "+red+"\n");
+						
+						JOptionPane.showMessageDialog(null, "Uspesno obrisan kurs!");
+						
+						}
+					}
+					else
+						JOptionPane.showMessageDialog(null, "Nije selektovan kurs za brisanje!", "Greska", JOptionPane.ERROR_MESSAGE);
+					
+				}
+			});
 			btnIzbrisiKurs.setMinimumSize(new Dimension(99, 23));
 			btnIzbrisiKurs.setMaximumSize(new Dimension(99, 23));
 			btnIzbrisiKurs.setPreferredSize(new Dimension(110, 23));
@@ -291,6 +309,7 @@ public class MenjacnicaGUI extends JFrame {
 				public void actionPerformed(ActionEvent arg0) {
 					mntmDodajKurs.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent arg0) {
+							
 							DodajKursGUI prozor = new DodajKursGUI();
 //							table.getSelectionModel().clearSelection();
 //							GUIKontroler.dodajKursOtvoriProzor();
@@ -310,7 +329,17 @@ public class MenjacnicaGUI extends JFrame {
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					// TODO Auto-generated method stub
+					int red = table.getSelectedRow();
+					if(red >= 0){
+						if(JOptionPane.showConfirmDialog(null, "Da li ste sigurni da zelite da obrisete kurs?", "Greska", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+						GUIKontroler.obrisiKurs(table.getSelectedRow());
+						dodajTekstStatus("Izbrisan je red sa indeksom: "+red+"\n");
+						JOptionPane.showMessageDialog(null, "Uspesno obrisan kurs!");
+						}
+					}
+					else
+						JOptionPane.showMessageDialog(null, "Nije selektovan kurs za brisanje!", "Greska", JOptionPane.ERROR_MESSAGE);
+					
 					
 				}
 			});

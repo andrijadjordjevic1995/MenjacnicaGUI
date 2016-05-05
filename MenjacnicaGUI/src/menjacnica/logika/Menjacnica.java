@@ -20,6 +20,9 @@ public class Menjacnica {
 	public void dodajKurs(Kurs kurs){
 		kursevi.add(kurs);
 	}
+	public void obrisiKurs(int index){
+		kursevi.remove(index);
+	}
 	
 	public Kurs vratiKurs(int index){
 		return kursevi.get(index);

@@ -37,9 +37,9 @@ public class DodajKursGUI extends JFrame {
 	private JTextField txtSkraceni;
 	private JButton btnOdustani;
 	private JButton btnDodaj;
-
+	
 	public DodajKursGUI() {
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 400, 230);
 		setTitle("Dodaj kurs");
 		
