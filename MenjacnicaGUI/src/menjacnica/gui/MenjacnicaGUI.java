@@ -173,9 +173,11 @@ public class MenjacnicaGUI extends JFrame {
 		if (table == null) {
 			MenjacnicaTableModel model = new MenjacnicaTableModel(GUIKontroler.getListaKurseva());
 			table = new JTable(model);
+			
 			table.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
+					//tablePopup.setVisible(true);
 					tablePopup.show(table, 0, 0);
 				}
 			});
@@ -194,11 +196,11 @@ public class MenjacnicaGUI extends JFrame {
 		if(tablePopup == null){
 			tablePopup = new JPopupMenu();
 			
-			tablePopup.setVisible(true);
+			
 			tablePopup.add(getMntmDodajKurs());
 			tablePopup.add(getMntmIzbrisiKurs());
 			tablePopup.add(getMntmIzvrsiZamenu());
-			
+			//tablePopup.setVisible(true);
 		}
 		return tablePopup;
 	}
