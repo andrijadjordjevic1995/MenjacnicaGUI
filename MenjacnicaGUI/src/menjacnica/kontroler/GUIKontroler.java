@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
+import menjacnica.gui.DodajKursGUI;
 import menjacnica.gui.MenjacnicaGUI;
 import menjacnica.logika.Kurs;
 import menjacnica.logika.Menjacnica;
@@ -44,27 +45,25 @@ public class GUIKontroler {
 		// TODO Auto-generated method stub
 		return menjacnica.getKursevi();
 	}
-	public static String ucitajFajl() {
+	public static void ucitajFajl() {
 		JFileChooser jfc = new JFileChooser();
 		jfc.setCurrentDirectory(new File(System.getProperty("user.home")));
 		int povratnaVrednost = jfc.showOpenDialog(glavniProzor.getContentPane());
 		
 		if(povratnaVrednost == JFileChooser.APPROVE_OPTION){
-			String putanja = jfc.getSelectedFile().getAbsolutePath();
-			return putanja;
+			String putanja = " Ucitan fajl: "+jfc.getSelectedFile().getAbsolutePath();
+			glavniProzor.dodajTekstStatus(putanja);
 		}
-		return null;
 	}
-	public static String ucitajUFajl() {
+	public static void ucitajUFajl() {
 		JFileChooser jfc = new JFileChooser();
 		jfc.setCurrentDirectory(new File(System.getProperty("user.home")));
 		int povratnaVrednost = jfc.showSaveDialog(glavniProzor.getContentPane());
 		
 		if(povratnaVrednost == JFileChooser.APPROVE_OPTION){
-			String putanja = jfc.getSelectedFile().getAbsolutePath();
-			return putanja;
+			String putanja =  "Sacuvan fajl: "+ jfc.getSelectedFile().getAbsolutePath();
+			glavniProzor.dodajTekstStatus(putanja);
 		}
-		return null;
 	}
 	
 	public static void izadji() {
@@ -75,6 +74,7 @@ public class GUIKontroler {
 			System.exit(0);
 		}
 	}
+	
 	public static void prikaziPodatkeOAutoru() {
 		JDialog dialog = new JDialog(glavniProzor, "O Autoru", true);
 		dialog.setResizable(false);
@@ -87,6 +87,27 @@ public class GUIKontroler {
 		dialog.setLocationRelativeTo(null);
 		dialog.pack();
 		dialog.setVisible(true);
+	}
+	public static boolean dodajKurs(String naziv, String sifra, String skraceniNaziv, String prodajni, String srednji, String kupovni) {
+		if(naziv.isEmpty() || naziv == null ||
+				sifra.isEmpty()|| sifra== null||
+				skraceniNaziv.isEmpty()||skraceniNaziv==null||
+				prodajni.isEmpty() || prodajni == null ||
+				srednji.isEmpty() || srednji == null ||
+				kupovni.isEmpty() || kupovni == null){
+			return false;
+		}
+		Kurs kurs = new Kurs(Integer.parseInt(sifra), skraceniNaziv, skraceniNaziv, Double.parseDouble(prodajni), Double.parseDouble(prodajni), Double.parseDouble(srednji));
+		menjacnica.dodajKurs(kurs);
+		osveziTabelu();
+		return true;
+	}
+	public static void osveziTabelu() {
+		glavniProzor.osveziTabelu(menjacnica.getKursevi());
+		
+	}
+	public static void dodajTekstStatus(String tekst){
+		glavniProzor.dodajTekstStatus(tekst);
 	}
 	
 }

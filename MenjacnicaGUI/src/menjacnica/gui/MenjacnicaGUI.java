@@ -27,6 +27,7 @@ import javax.swing.event.PopupMenuListener;
 
 import menjacnica.gui.model.MenjacnicaTableModel;
 import menjacnica.kontroler.GUIKontroler;
+import menjacnica.logika.Kurs;
 
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -42,6 +43,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
 
 public class MenjacnicaGUI extends JFrame {
 
@@ -121,9 +123,7 @@ public class MenjacnicaGUI extends JFrame {
 			mntmOpen = new JMenuItem("Open");
 			mntmOpen.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					String dodaj = GUIKontroler.ucitajFajl();
-					if(dodaj != null)
-						textAreaSouth.setText(textAreaSouth.getText()+"\n Ucitan fajl: "+dodaj);
+					GUIKontroler.ucitajFajl();
 				}
 			});
 			mntmOpen.setIcon(new ImageIcon(MenjacnicaGUI.class.getResource("/javax/swing/plaf/metal/icons/ocean/directory.gif")));
@@ -138,9 +138,8 @@ public class MenjacnicaGUI extends JFrame {
 			mntmSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
 			mntmSave.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					String dodaj = GUIKontroler.ucitajUFajl();
-					if(dodaj != null)
-						textAreaSouth.setText(textAreaSouth.getText()+"\n Sacuvan fajl: "+dodaj);
+					GUIKontroler.ucitajUFajl();
+					
 				}
 			});
 		}
@@ -247,6 +246,14 @@ public class MenjacnicaGUI extends JFrame {
 	private JButton getBtnDodajKurs() {
 		if (btnDodajKurs == null) {
 			btnDodajKurs = new JButton("Dodaj Kurs");
+			btnDodajKurs.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					DodajKursGUI prozor = new DodajKursGUI();
+//					prozor.setPreferredSize(new Dimension(300, 220));
+//					prozor.setVisible(true);
+					
+				}
+			});
 			btnDodajKurs.setMinimumSize(new Dimension(99, 23));
 			btnDodajKurs.setMaximumSize(new Dimension(99, 23));
 			btnDodajKurs.setPreferredSize(new Dimension(110, 23));
@@ -282,7 +289,14 @@ public class MenjacnicaGUI extends JFrame {
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					// TODO Auto-generated method stub
+					mntmDodajKurs.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							DodajKursGUI prozor = new DodajKursGUI();
+//							table.getSelectionModel().clearSelection();
+//							GUIKontroler.dodajKursOtvoriProzor();
+
+						}
+					});
 					
 				}
 			});
@@ -316,5 +330,15 @@ public class MenjacnicaGUI extends JFrame {
 			});
 		}
 		return mntmIzvrsiZamenu;
+	}
+	
+	public void dodajTekstStatus(String txt){
+		if(txt != null)
+			textAreaSouth.setText(textAreaSouth.getText()+txt+"\n");
+	}
+
+	public void osveziTabelu(List<Kurs> kursevi) {
+		MenjacnicaTableModel model = (MenjacnicaTableModel)table.getModel();
+		model.osveziTabelu(kursevi);
 	}
 }

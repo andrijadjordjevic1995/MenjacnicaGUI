@@ -68,4 +68,5 @@ public class MenjacnicaTableModel extends AbstractTableModel {
 		return kursevi.get(red);
 		
 	}
+	
 }
