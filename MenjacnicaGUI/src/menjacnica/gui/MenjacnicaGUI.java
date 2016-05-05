@@ -292,6 +292,7 @@ public class MenjacnicaGUI extends JFrame {
 			btnIzvrsiZamenu = new JButton("Izvrsi Zamenu");
 			btnIzvrsiZamenu.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
+					IzvrsiZamenuGUI zamenaProzor = new IzvrsiZamenuGUI();
 				}
 			});
 			btnIzvrsiZamenu.setPreferredSize(new Dimension(110, 23));
@@ -353,7 +354,7 @@ public class MenjacnicaGUI extends JFrame {
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					// TODO Auto-generated method stub
+					DodajKursGUI prozor = new DodajKursGUI();
 					
 				}
 			});
